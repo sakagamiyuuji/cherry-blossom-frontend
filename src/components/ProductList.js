@@ -1,25 +1,27 @@
 import React from 'react';
+import { Grid, Container } from '@mui/material';
 import ProductCard from './ProductCard';
-import products from '../data/products';
 
-const ProductList = () => {
+const ProductList = ({ products }) => {
+  // Log the products array to the console
+  console.log(products);
+
   return (
-    <div className="container py-5">
-      <div className="row">
+    <Container sx={{ py: 5 }}>
+      <Grid container spacing={4}>
         {products.map(product => (
-          <div
-            className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
-            key={product.id}
-          >
+          <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
             <ProductCard
-              image={product.image.default} // Make sure the image is correctly imported
+              image={product.image}
               title={product.title}
+              description={product.description}
               price={product.price}
+              rating={product.rating}
             />
-          </div>
+          </Grid>
         ))}
-      </div>
-    </div>
+      </Grid>
+    </Container>
   );
 };
 

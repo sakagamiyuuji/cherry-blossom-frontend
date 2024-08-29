@@ -14,18 +14,8 @@ const Header = () => {
   return (
     <AppBar position="static" color="transparent" elevation={0}>
       <Container maxWidth="lg">
-        {' '}
-        {/* Wrapping Toolbar in a Container */}
         <Toolbar disableGutters>
-          {' '}
-          {/* disableGutters to remove extra padding */}
-          <Typography
-            variant="h6"
-            sx={{
-              flexGrow: 1,
-              color: '#F5A3B7',
-            }}
-          >
+          <Typography variant="h6" sx={{ flexGrow: 1, color: 'primary.main' }}>
             Cherry Blossom
           </Typography>
           <Button color="inherit">Shop All</Button>
