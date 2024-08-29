@@ -7,7 +7,7 @@ const theme = createTheme({
       main: '#F5A3B7', // Pink color used in buttons
     },
     secondary: {
-      main: '#333', // Darker color used in titles
+      main: '#697586', // Darker color used in titles
     },
     text: {
       primary: '#000000', // Default black text

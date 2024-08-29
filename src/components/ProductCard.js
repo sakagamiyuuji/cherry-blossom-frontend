@@ -16,7 +16,7 @@ const ProductCard = ({ image, title, description, price, rating }) => {
   return (
     <Card
       sx={{
-        maxWidth: '100%',
+        maxWidth: '600px',
         boxShadow: 'none',
         border: '1px solid #eee',
         transition: 'transform 0.3s ease, box-shadow 0.3s ease',

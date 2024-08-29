@@ -6,7 +6,7 @@ const products = [
     image: require('../assets/images/product1.png'),
     description:
       'Lightweight sun protection that doesn’t leave a greasy residue.',
-    rating: 4.5, // Example rating
+    rating: 4.5,
   },
   {
     id: 2,
@@ -14,7 +14,7 @@ const products = [
     price: 45.0,
     image: require('../assets/images/product1.png'),
     description: 'Hydrating snail cream for smooth and glowing skin.',
-    rating: 4.0, // Example rating
+    rating: 4.0,
   },
   {
     id: 3,
@@ -22,7 +22,7 @@ const products = [
     price: 28.0,
     image: require('../assets/images/product1.png'),
     description: 'Gentle emulsion to clarify and smooth your skin tone.',
-    rating: 4.2, // Example rating
+    rating: 4.2,
   },
   {
     id: 4,
@@ -30,7 +30,7 @@ const products = [
     price: 35.0,
     image: require('../assets/images/product1.png'),
     description: 'Gel-based cream that gives your skin a dewy glow.',
-    rating: 4.7, // Example rating
+    rating: 4.7,
   },
   {
     id: 5,
@@ -38,7 +38,7 @@ const products = [
     price: 40.0,
     image: require('../assets/images/product1.png'),
     description: 'Deeply hydrating serum for dry and sensitive skin.',
-    rating: 4.8, // Example rating
+    rating: 4.8,
   },
   {
     id: 6,
@@ -46,7 +46,7 @@ const products = [
     price: 37.0,
     image: require('../assets/images/product1.png'),
     description: 'Brightening cream that targets dark spots and dullness.',
-    rating: 4.4, // Example rating
+    rating: 4.4,
   },
   {
     id: 7,
@@ -54,7 +54,7 @@ const products = [
     price: 55.0,
     image: require('../assets/images/product1.png'),
     description: 'Lightweight anti-aging lotion that firms and smoothens.',
-    rating: 4.6, // Example rating
+    rating: 4.6,
   },
   {
     id: 8,
@@ -62,7 +62,103 @@ const products = [
     price: 25.0,
     image: require('../assets/images/product1.png'),
     description: 'Toner that tightens pores and balances skin oil.',
-    rating: 4.1, // Example rating
+    rating: 4.1,
+  },
+  {
+    id: 9,
+    title: 'Exfoliating Facial Scrub',
+    price: 29.0,
+    image: require('../assets/images/product1.png'),
+    description: 'Gently exfoliates the skin to remove dead skin cells.',
+    rating: 4.3,
+  },
+  {
+    id: 10,
+    title: 'Revitalizing Eye Cream',
+    price: 48.0,
+    image: require('../assets/images/product1.png'),
+    description: 'Eye cream that reduces puffiness and dark circles.',
+    rating: 4.5,
+  },
+  {
+    id: 11,
+    title: 'Soothing Face Mask',
+    price: 18.0,
+    image: require('../assets/images/product1.png'),
+    description: 'A soothing face mask that calms irritated skin.',
+    rating: 4.0,
+  },
+  {
+    id: 12,
+    title: 'Whitening Body Lotion',
+    price: 22.0,
+    image: require('../assets/images/product1.png'),
+    description: 'Lotion that brightens and evens skin tone.',
+    rating: 3.9,
+  },
+  {
+    id: 13,
+    title: 'Nourishing Night Cream',
+    price: 50.0,
+    image: require('../assets/images/product1.png'),
+    description: 'Night cream that deeply nourishes and repairs the skin.',
+    rating: 4.7,
+  },
+  {
+    id: 14,
+    title: 'Refreshing Face Mist',
+    price: 15.0,
+    image: require('../assets/images/product1.png'),
+    description: 'A refreshing mist to hydrate and rejuvenate your skin.',
+    rating: 4.2,
+  },
+  {
+    id: 15,
+    title: 'Clarifying Charcoal Mask',
+    price: 30.0,
+    image: require('../assets/images/product1.png'),
+    description: 'Detoxifying charcoal mask that draws out impurities.',
+    rating: 4.6,
+  },
+  {
+    id: 16,
+    title: 'Vitamin C Serum',
+    price: 42.0,
+    image: require('../assets/images/product1.png'),
+    description: 'Brightening serum packed with Vitamin C.',
+    rating: 4.8,
+  },
+  {
+    id: 17,
+    title: 'Hydrating Face Wash',
+    price: 20.0,
+    image: require('../assets/images/product1.png'),
+    description: 'Gentle face wash that hydrates and cleanses.',
+    rating: 4.3,
+  },
+  {
+    id: 18,
+    title: 'Firming Neck Cream',
+    price: 38.0,
+    image: require('../assets/images/product1.png'),
+    description: 'Cream that firms and tightens the skin on your neck.',
+    rating: 4.4,
+  },
+  {
+    id: 19,
+    title: 'Aloe Vera Gel',
+    price: 12.0,
+    image: require('../assets/images/product1.png'),
+    description: 'Aloe vera gel that soothes and moisturizes the skin.',
+    rating: 4.1,
+  },
+  {
+    id: 20,
+    title: 'Balancing Face Oil',
+    price: 45.0,
+    image: require('../assets/images/product1.png'),
+    description: 'Face oil that balances and nourishes the skin.',
+    rating: 4.5,
   },
 ];
 

@@ -1,13 +1,17 @@
 import React from 'react';
-import { Container, Grid, Typography, Box } from '@mui/material';
 import Banner from '../components/Banner';
-import ProductCard from '../components/ProductCard';
-import listProduct from '../data/products';
 import bannerImage from '../assets/images/banner.png';
-import ProductList from '../components/ProductList';
-import DecorativeLine from '../components/DecorativeLine';
+import ProductSection from '../components/ProductSection';
+import Footer from '../components/Footer';
+import listProduct from '../data/products';
+import FollowUsSection from '../components/FollowUsSection';
+import followUsDummy from '../data/followusdummy';
 
 const HomePage = () => {
+  // For demonstration, you can filter the products for each section
+  const newArrivals = listProduct.slice(0, 10); // First 10 products
+  const bestSellers = listProduct.slice(0, 12); // Next 10 products
+
   return (
     <div>
       <Banner
@@ -16,48 +20,33 @@ const HomePage = () => {
         subtitle="Great gifts for yourself and loved ones"
         buttonText="Shop Now"
       />
-      <Container sx={{ py: 8 }}>
-        <Box textAlign="center" sx={{ py: 4 }}>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: '8px',
-            }}
-          >
-            <DecorativeLine />
-            <Typography
-              variant="h4"
-              component="h2"
-              sx={{
-                fontSize: '24px', // Set the text size to 24px
-                fontFamily: 'Poppins', // Use Poppins font
-                fontWeight: 700, // Use Medium weight (500)
-                color: '#000000',
-              }}
-            >
-              NEW ARRIVALS
-            </Typography>
-            <DecorativeLine />
-          </div>
-          <Typography
-            variant="body1"
-            component="p"
-            sx={{
-              color: '#697586',
-              fontSize: '18px',
-              marginTop: '8px',
-            }}
-          >
-            See All
-          </Typography>
-        </Box>
 
-        <Grid container spacing={4}>
-          <ProductList products={listProduct} />
-        </Grid>
-      </Container>
+      <ProductSection
+        title="NEW ARRIVALS"
+        subtitle="See All"
+        products={newArrivals}
+      />
+
+      <ProductSection
+        title="BEST SELLER"
+        subtitle="Top rated products"
+        products={bestSellers}
+      />
+
+      <ProductSection
+        title="FLASH SALE"
+        subtitle="Ayo buruan beli sekarang"
+        products={bestSellers}
+      />
+
+      <FollowUsSection
+        images={followUsDummy}
+        title="SHARE HOW YOU BLOSSOMED WITH"
+        hashtag="#BLOOMBEAUTY"
+        buttonText="Follow Us"
+      />
+
+      <Footer />
     </div>
   );
 };
