@@ -1,13 +1,39 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400; /* Set default font weight to 400 */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.poppins-light {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
 }
+
+.poppins-regular {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+}
+
+.poppins-medium {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+.poppins-semibold {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.poppins-bold {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+}
+
+.poppins-extrabold {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+}
+
+
