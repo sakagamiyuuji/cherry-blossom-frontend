@@ -28,7 +28,7 @@ const CartItem = ({
         component="img"
         src={imageUrl}
         alt={name}
-        sx={{ width: 80, height: 80, objectFit: 'contain', mr: 2 }}
+        sx={{ width: 90, height: 90, objectFit: 'contain', mr: 2 }}
       />
 
       {/* Product Details: Name, Price, Quantity */}
@@ -55,78 +55,88 @@ const CartItem = ({
         >
           ${price.toFixed(2)}
         </Typography>
+
         <Box
           sx={{
             display: 'flex',
-            alignItems: 'center',
-            border: '1px solid #E0E0E0',
-            borderRadius: '8px',
-            padding: '4px',
-            width: '160px', // Adjusted width to accommodate the trash icon
+            alignItems: 'center', // Align the quantity control and trash icon vertically centered
+            width: 'auto',
           }}
         >
-          <IconButton
-            size="small"
-            onClick={() => onQuantityChange(id, quantity - 1)}
-            disabled={quantity <= 1}
+          <Box
             sx={{
-              padding: 0,
-              minWidth: 0,
-              width: '24px',
-              height: '24px',
+              display: 'flex',
+              alignItems: 'center',
+              border: '1px solid #E0E0E0',
+              borderRadius: '8px',
+              padding: '4px',
+              width: '100px', // Set a width to accommodate all controls
             }}
           >
-            <RemoveIcon fontSize="small" />
-          </IconButton>
-          <TextField
-            type="number"
-            value={quantity}
-            onChange={handleQuantityChange}
-            inputProps={{
-              min: 1,
-              max: currentStock,
-              style: {
-                textAlign: 'center',
+            <IconButton
+              size="small"
+              onClick={() => onQuantityChange(id, quantity - 1)}
+              disabled={quantity <= 1}
+              sx={{
                 padding: 0,
-                width: '40px', // Adjust the width of the input field
+                minWidth: 0,
+                width: '24px',
                 height: '24px',
-                border: 'none',
-              },
-            }}
-            sx={{
-              mx: 1,
-              '& input[type=number]::-webkit-outer-spin-button, & input[type=number]::-webkit-inner-spin-button':
-                {
-                  '-webkit-appearance': 'none', // Remove increment arrows for Chrome/Safari
-                  margin: 0, // Remove extra margin for Chrome/Safari
+              }}
+            >
+              <RemoveIcon fontSize="small" />
+            </IconButton>
+            <TextField
+              type="number"
+              value={quantity}
+              onChange={handleQuantityChange}
+              inputProps={{
+                min: 1,
+                max: currentStock,
+                style: {
+                  textAlign: 'center',
+                  padding: 0,
+                  width: '36px', // Adjust the width of the input field
+                  height: '24px',
+                  border: 'none',
                 },
-              '& input[type=number]': {
-                '-moz-appearance': 'textfield', // Remove increment arrows for Firefox
-                appearance: 'textfield', // Remove increment arrows for standard browsers
-              },
-              '& input': {
+              }}
+              sx={{
+                mx: 1,
+                '& input[type=number]::-webkit-outer-spin-button, & input[type=number]::-webkit-inner-spin-button':
+                  {
+                    '-webkit-appearance': 'none', // Remove increment arrows for Chrome/Safari
+                    margin: 0, // Remove extra margin for Chrome/Safari
+                  },
+                '& input[type=number]': {
+                  '-moz-appearance': 'textfield', // Remove increment arrows for Firefox
+                  appearance: 'textfield', // Remove increment arrows for standard browsers
+                },
+                '& input': {
+                  padding: 0,
+                  textAlign: 'center',
+                  border: 'none',
+                },
+                '& fieldset': {
+                  display: 'none',
+                },
+              }}
+            />
+            <IconButton
+              size="small"
+              onClick={() => onQuantityChange(id, quantity + 1)}
+              disabled={quantity >= currentStock}
+              sx={{
                 padding: 0,
-                textAlign: 'center',
-                border: 'none',
-              },
-              '& fieldset': {
-                display: 'none',
-              },
-            }}
-          />
-          <IconButton
-            size="small"
-            onClick={() => onQuantityChange(id, quantity + 1)}
-            disabled={quantity >= currentStock}
-            sx={{
-              padding: 0,
-              minWidth: 0,
-              width: '24px',
-              height: '24px',
-            }}
-          >
-            <AddIcon fontSize="small" />
-          </IconButton>
+                minWidth: 0,
+                width: '24px',
+                height: '24px',
+              }}
+            >
+              <AddIcon fontSize="small" />
+            </IconButton>
+          </Box>
+
           <IconButton
             size="small"
             onClick={() => onRemove(id)}

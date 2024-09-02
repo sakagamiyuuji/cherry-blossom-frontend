@@ -1,5 +1,4 @@
-// src/Header.js
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -14,11 +13,15 @@ import SearchIcon from '@mui/icons-material/Search';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LoginDialog from './LoginDialog';
 import { useCartDrawer } from './CartDrawer';
+import MegaMenu from './MegaMenu'; // Ensure the path is correct
 
 const Header = () => {
   const [isLoginDialogOpen, setLoginDialogOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [currentMenuItems, setCurrentMenuItems] = useState([]);
   const { openDrawer: openCartDrawer, DrawerComponent: CartDrawerComponent } =
     useCartDrawer();
+  const menuRef = useRef(null); // Ref to track the MegaMenu component
 
   const handleOpenLoginDialog = () => {
     setLoginDialogOpen(true);
@@ -27,6 +30,35 @@ const Header = () => {
   const handleCloseLoginDialog = () => {
     setLoginDialogOpen(false);
   };
+
+  const handleMenuOpen = (event, menuItems) => {
+    setAnchorEl(event.currentTarget);
+    setCurrentMenuItems(menuItems);
+  };
+
+  const handleMenuClose = event => {
+    // Check if the mouse is entering the MegaMenu; if not, close the menu
+    if (!menuRef.current || !menuRef.current.contains(event.relatedTarget)) {
+      setAnchorEl(null);
+      setCurrentMenuItems([]);
+    }
+  };
+
+  const shopAllMenuItems = [
+    {
+      title: 'Shop All',
+      items: ['Bestsellers', 'Collection', 'Deals', 'Minis', 'New Arrivals'],
+    },
+    {
+      title: 'Double-Cleanse',
+      items: ['Cleansing Balms', 'Oil Cleansers', 'Water Cleansers'],
+    },
+    {
+      title: 'Masks',
+      items: ['Sheet Masks', 'Wash-off Masks', 'Sleeping Masks'],
+    },
+    { title: 'Sun Protection', items: ['Sunscreen', 'Makeup & SPF'] },
+  ];
 
   return (
     <>
@@ -56,9 +88,8 @@ const Header = () => {
                     color: '#fff',
                   },
                 }}
-                onClick={() => {
-                  console.log('Shop All clicked');
-                }}
+                onMouseEnter={event => handleMenuOpen(event, shopAllMenuItems)}
+                onMouseLeave={handleMenuClose}
               >
                 Shop All
               </Button>
@@ -70,9 +101,7 @@ const Header = () => {
                     color: '#fff',
                   },
                 }}
-                onClick={() => {
-                  console.log('Bestsellers clicked');
-                }}
+                onMouseLeave={handleMenuClose}
               >
                 Bestsellers
               </Button>
@@ -84,9 +113,7 @@ const Header = () => {
                     color: '#fff',
                   },
                 }}
-                onClick={() => {
-                  console.log('Collection clicked');
-                }}
+                onMouseLeave={handleMenuClose}
               >
                 Collection
               </Button>
@@ -98,9 +125,7 @@ const Header = () => {
                     color: '#fff',
                   },
                 }}
-                onClick={() => {
-                  console.log('About Us clicked');
-                }}
+                onMouseLeave={handleMenuClose}
               >
                 About Us
               </Button>
@@ -112,9 +137,7 @@ const Header = () => {
                     color: '#fff',
                   },
                 }}
-                onClick={() => {
-                  console.log('Blog clicked');
-                }}
+                onMouseLeave={handleMenuClose}
               >
                 Blog
               </Button>
@@ -208,6 +231,15 @@ const Header = () => {
 
       {/* Render the Cart Drawer Component */}
       <CartDrawerComponent />
+
+      {/* Render the Mega Menu */}
+      <MegaMenu
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={handleMenuClose}
+        menuItems={currentMenuItems}
+        ref={menuRef} // Pass ref to MegaMenu
+      />
     </>
   );
 };

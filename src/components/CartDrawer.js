@@ -19,7 +19,7 @@ const CartDrawer = ({ open, onClose }) => {
       quantity: 1,
       currentStock: 5,
       imageUrl:
-        'https://greendroprecycling.com/wp-content/uploads/2017/04/GreenDrop_Station_Aluminum_Can_1.jpg',
+        'https://uploads.commoninja.com/searchengine/wordpress/woo-free-product-sample.png',
     },
     {
       id: 2,
