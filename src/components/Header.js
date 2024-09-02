@@ -1,3 +1,4 @@
+// src/Header.js
 import React, { useState } from 'react';
 import {
   AppBar,
@@ -11,13 +12,13 @@ import {
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import LoginDialog from './LoginDialog'; // Import the LoginDialog component
-import { useCartDialog } from './CartDialog'; // Import the useCartDialog hook
+import LoginDialog from './LoginDialog';
+import { useCartDrawer } from './CartDrawer';
 
 const Header = () => {
   const [isLoginDialogOpen, setLoginDialogOpen] = useState(false);
-  const { openDialog: openCartDialog, DialogComponent: CartDialogComponent } =
-    useCartDialog();
+  const { openDrawer: openCartDrawer, DrawerComponent: CartDrawerComponent } =
+    useCartDrawer();
 
   const handleOpenLoginDialog = () => {
     setLoginDialogOpen(true);
@@ -32,6 +33,7 @@ const Header = () => {
       <AppBar position="static" color="transparent" elevation={0}>
         <Container maxWidth="lg">
           <Toolbar disableGutters>
+            {/* Logo Section */}
             <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
               <Typography
                 variant="h6"
@@ -41,6 +43,8 @@ const Header = () => {
                 Cherry <span style={{ color: '#000' }}>Blossom</span>
               </Typography>
             </Box>
+
+            {/* Navigation Links */}
             <Box
               sx={{ display: 'flex', flexGrow: 1, justifyContent: 'center' }}
             >
@@ -115,7 +119,10 @@ const Header = () => {
                 Blog
               </Button>
             </Box>
+
+            {/* Action Icons */}
             <Box sx={{ display: 'flex', alignItems: 'center', ml: 4 }}>
+              {/* Search Icon */}
               <Box
                 sx={{
                   display: 'flex',
@@ -141,6 +148,8 @@ const Header = () => {
                   Search
                 </Typography>
               </Box>
+
+              {/* Account Icon */}
               <Box
                 sx={{
                   display: 'flex',
@@ -155,7 +164,7 @@ const Header = () => {
                     color: 'primary.main',
                   },
                 }}
-                onClick={handleOpenLoginDialog} // Open the login dialog on click
+                onClick={handleOpenLoginDialog}
               >
                 <IconButton color="inherit" sx={{ paddingBottom: '2px' }}>
                   <AccountCircleIcon />
@@ -164,6 +173,8 @@ const Header = () => {
                   Account
                 </Typography>
               </Box>
+
+              {/* Cart Icon */}
               <Box
                 sx={{
                   display: 'flex',
@@ -178,7 +189,7 @@ const Header = () => {
                     color: 'primary.main',
                   },
                 }}
-                onClick={openCartDialog} // Open the cart dialog on click
+                onClick={openCartDrawer}
               >
                 <IconButton color="inherit" sx={{ paddingBottom: '2px' }}>
                   <ShoppingCartIcon />
@@ -195,8 +206,8 @@ const Header = () => {
       {/* Render the Login Dialog Component */}
       <LoginDialog open={isLoginDialogOpen} onClose={handleCloseLoginDialog} />
 
-      {/* Render the Cart Dialog Component */}
-      <CartDialogComponent />
+      {/* Render the Cart Drawer Component */}
+      <CartDrawerComponent />
     </>
   );
 };
