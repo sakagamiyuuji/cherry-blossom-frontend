@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -10,20 +10,56 @@ import {
   Divider,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import CartItem from './CartItem'; // Import the CartItem component we created earlier
+import CartItem from './CartItem'; // Import the CartItem component
 
-const CartDialog = ({
-  open,
-  onClose,
-  items,
-  onQuantityChange,
-  onRemoveItem,
-}) => {
-  const calculateSubtotal = () => {
+const CartDialog = ({ open, onClose }) => {
+  const [items, setItems] = useState([
+    {
+      id: 1,
+      name: 'Soft Finish',
+      price: 19.6,
+      quantity: 1,
+      currentStock: 5, // Example stock
+      imageUrl:
+        'https://greendroprecycling.com/wp-content/uploads/2017/04/GreenDrop_Station_Aluminum_Can_1.jpg', // Image URL
+    },
+    {
+      id: 2,
+      name: 'Soft Finish',
+      price: 19.6,
+      quantity: 2,
+      currentStock: 3, // Example stock
+      imageUrl:
+        'https://greendroprecycling.com/wp-content/uploads/2017/04/GreenDrop_Station_Aluminum_Can_1.jpg', // Image URL
+    },
+    {
+      id: 3,
+      name: 'Soft Finish',
+      price: 19.6,
+      quantity: 3,
+      currentStock: 3, // Example stock
+      imageUrl:
+        'https://greendroprecycling.com/wp-content/uploads/2017/04/GreenDrop_Station_Aluminum_Can_1.jpg', // Image URL
+    },
+  ]);
+
+  const handleQuantityChange = (id, newQuantity) => {
+    setItems(prevItems =>
+      prevItems.map(item =>
+        item.id === id ? { ...item, quantity: newQuantity } : item
+      )
+    );
+  };
+
+  const handleRemoveItem = id => {
+    setItems(prevItems => prevItems.filter(item => item.id !== id));
+  };
+
+  const subtotal = useMemo(() => {
     return items
       .reduce((total, item) => total + item.price * item.quantity, 0)
       .toFixed(2);
-  };
+  }, [items]);
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
@@ -49,9 +85,11 @@ const CartDialog = ({
             id={item.id}
             name={item.name}
             price={item.price}
-            initialQuantity={item.quantity}
-            onQuantityChange={onQuantityChange}
-            onRemove={onRemoveItem}
+            quantity={item.quantity}
+            imageUrl={item.imageUrl}
+            currentStock={item.currentStock} // Pass the current stock to CartItem
+            onQuantityChange={handleQuantityChange}
+            onRemove={handleRemoveItem}
           />
         ))}
         <Divider sx={{ my: 2 }} />
@@ -74,7 +112,7 @@ const CartDialog = ({
               color: '#383838',
             }}
           >
-            ${calculateSubtotal()}
+            ${subtotal}
           </Typography>
         </Box>
         <Button
@@ -106,14 +144,8 @@ export const useCartDialog = () => {
   const openDialog = () => setOpen(true);
   const closeDialog = () => setOpen(false);
 
-  const DialogComponent = ({ items, onQuantityChange, onRemoveItem }) => (
-    <CartDialog
-      open={open}
-      onClose={closeDialog}
-      items={items}
-      onQuantityChange={onQuantityChange}
-      onRemoveItem={onRemoveItem}
-    />
+  const DialogComponent = () => (
+    <CartDialog open={open} onClose={closeDialog} />
   );
 
   return {

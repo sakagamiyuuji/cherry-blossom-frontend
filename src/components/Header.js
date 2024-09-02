@@ -12,9 +12,12 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LoginDialog from './LoginDialog'; // Import the LoginDialog component
+import { useCartDialog } from './CartDialog'; // Import the useCartDialog hook
 
 const Header = () => {
   const [isLoginDialogOpen, setLoginDialogOpen] = useState(false);
+  const { openDialog: openCartDialog, DialogComponent: CartDialogComponent } =
+    useCartDialog();
 
   const handleOpenLoginDialog = () => {
     setLoginDialogOpen(true);
@@ -175,9 +178,7 @@ const Header = () => {
                     color: 'primary.main',
                   },
                 }}
-                onClick={() => {
-                  console.log('Cart clicked');
-                }}
+                onClick={openCartDialog} // Open the cart dialog on click
               >
                 <IconButton color="inherit" sx={{ paddingBottom: '2px' }}>
                   <ShoppingCartIcon />
@@ -193,6 +194,9 @@ const Header = () => {
 
       {/* Render the Login Dialog Component */}
       <LoginDialog open={isLoginDialogOpen} onClose={handleCloseLoginDialog} />
+
+      {/* Render the Cart Dialog Component */}
+      <CartDialogComponent />
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo } from 'react';
 import { Box, IconButton, Typography, TextField } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -8,36 +8,34 @@ const CartItem = ({
   id,
   name,
   price,
-  initialQuantity,
+  quantity,
+  imageUrl,
+  currentStock,
   onRemove,
   onQuantityChange,
 }) => {
-  const [quantity, setQuantity] = useState(initialQuantity);
-
   const handleIncrease = () => {
-    const newQuantity = quantity + 1;
-    setQuantity(newQuantity);
-    onQuantityChange(id, newQuantity);
+    if (quantity < currentStock) {
+      onQuantityChange(id, quantity + 1);
+    }
   };
 
   const handleDecrease = () => {
     if (quantity > 1) {
-      const newQuantity = quantity - 1;
-      setQuantity(newQuantity);
-      onQuantityChange(id, newQuantity);
+      onQuantityChange(id, quantity - 1);
     }
   };
 
   const handleRemove = () => {
     onRemove(id);
-    onQuantityChange(id, 0); // Pass 0 as the new quantity to indicate removal
+    onQuantityChange(id, 0); // Optionally indicate the item was removed
   };
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
       <Box sx={{ flex: '0 0 auto', marginRight: '15px' }}>
         <img
-          src="/path-to-product-image.png" // Replace with actual image path
+          src={imageUrl} // Use the provided image URL
           alt={name}
           style={{ width: '50px', height: 'auto' }}
         />
@@ -64,7 +62,11 @@ const CartItem = ({
         </Typography>
       </Box>
       <Box sx={{ display: 'flex', alignItems: 'center', mr: 1 }}>
-        <IconButton size="small" onClick={handleDecrease}>
+        <IconButton
+          size="small"
+          onClick={handleDecrease}
+          disabled={quantity <= 1}
+        >
           <RemoveIcon />
         </IconButton>
         <TextField
@@ -80,7 +82,11 @@ const CartItem = ({
           }}
           readOnly
         />
-        <IconButton size="small" onClick={handleIncrease}>
+        <IconButton
+          size="small"
+          onClick={handleIncrease}
+          disabled={quantity >= currentStock}
+        >
           <AddIcon />
         </IconButton>
       </Box>
@@ -91,4 +97,4 @@ const CartItem = ({
   );
 };
 
-export default CartItem;
+export default memo(CartItem);
