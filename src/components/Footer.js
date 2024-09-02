@@ -103,7 +103,12 @@ const Footer = () => {
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={2}>
-            <Typography variant="h6" gutterBottom sx={{ color: '#fff' }}>
+            <Typography
+              variant="h6"
+              fontSize={'16px'}
+              gutterBottom
+              sx={{ color: '#b5b0c1' }}
+            >
               HELP
             </Typography>
             <Link
@@ -138,7 +143,13 @@ const Footer = () => {
             </Link>
           </Grid>
           <Grid item xs={12} sm={6} md={2}>
-            <Typography variant="h6" gutterBottom sx={{ color: '#fff' }}>
+            <Typography
+              variant="h6"
+              fontSize={'16px'}
+              gutterBottom
+              textDecoration="none"
+              sx={{ color: '#b5b0c1' }}
+            >
               MY ACCOUNT
             </Typography>
             <Link
@@ -147,6 +158,7 @@ const Footer = () => {
               variant="body2"
               display="block"
               gutterBottom
+              textDecoration="none"
               sx={{ color: '#fff' }}
             >
               Addresses
@@ -157,6 +169,7 @@ const Footer = () => {
               variant="body2"
               display="block"
               gutterBottom
+              textDecoration="none"
               sx={{ color: '#fff' }}
             >
               Order Status
@@ -167,6 +180,7 @@ const Footer = () => {
               variant="body2"
               display="block"
               gutterBottom
+              textDecoration="none"
               sx={{ color: '#fff' }}
             >
               Wishlist
@@ -174,9 +188,10 @@ const Footer = () => {
           </Grid>
           <Grid item xs={12} sm={6} md={2}>
             <Typography
-              variant="p"
+              variant="h6"
+              fontSize={'16px'}
               gutterBottom
-              sx={{ color: '#fff', fontSize: '16px' }}
+              sx={{ color: '#b5b0c1', textDecoration: 'none' }}
             >
               CUSTOMER CARE
             </Typography>
@@ -196,7 +211,7 @@ const Footer = () => {
               variant="body2"
               display="block"
               gutterBottom
-              sx={{ color: '#fff' }}
+              sx={{ color: '#fff', textDecoration: 'none' }}
             >
               Blog
             </Link>
@@ -208,7 +223,7 @@ const Footer = () => {
             <Typography
               variant="body2"
               color="textSecondary"
-              sx={{ color: '#fff' }}
+              sx={{ color: '#fff', textDecoration: 'none' }}
             >
               Stay informed, subscribe to our newsletter now!
             </Typography>
