@@ -1,14 +1,16 @@
 import React, { forwardRef } from 'react';
 import { Box, Grid, Typography, Popper } from '@mui/material';
-import { styled } from '@mui/system';
+import { styled, useTheme } from '@mui/system';
 
 // Define reusable styles using the `styled` API
 const StyledPopper = styled(Popper)(({ theme }) => ({
   zIndex: 1300, // Ensure it is on top
-  width: '100%', // Full width
+  width: theme.breakpoints.values.lg, // Set width to 'lg' breakpoint value
+  maxWidth: '100%', // Ensure it doesn't overflow on smaller screens
   padding: '20px 40px', // Adjust padding to match the design
   backgroundColor: '#ffffff', // Ensure the background is white
   boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)', // Subtle shadow for depth
+  transformOrigin: 'center top', // Ensures it scales from the center
 }));
 
 const HeaderText = styled(Typography)(({ theme }) => ({
@@ -27,11 +29,13 @@ const MenuItemText = styled(Typography)(({ theme }) => ({
 }));
 
 const MegaMenu = forwardRef(({ anchorEl, open, onClose, menuItems }, ref) => {
+  const theme = useTheme(); // Get theme to use breakpoints
+
   return (
     <StyledPopper
       open={open}
       anchorEl={anchorEl}
-      placement="bottom-start"
+      placement="bottom"
       modifiers={[
         {
           name: 'offset',
@@ -39,10 +43,22 @@ const MegaMenu = forwardRef(({ anchorEl, open, onClose, menuItems }, ref) => {
             offset: [0, 10],
           },
         },
+        {
+          name: 'flip',
+          enabled: false, // Disable flip to prevent it from aligning right
+        },
+        {
+          name: 'preventOverflow',
+          options: {
+            boundary: 'viewport', // Prevents overflow relative to viewport
+            padding: 8, // Adds padding around boundaries
+          },
+        },
       ]}
       ref={ref} // Attach the forwarded ref to the Popper component
+      onMouseLeave={onClose} // Attach onMouseLeave event to StyledPopper
     >
-      <Box onMouseLeave={onClose}>
+      <Box>
         <Grid container spacing={4}>
           {menuItems.map((section, index) => (
             <Grid item xs={3} key={index}>

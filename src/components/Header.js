@@ -36,9 +36,12 @@ const Header = () => {
     setCurrentMenuItems(menuItems);
   };
 
-  const handleMenuClose = event => {
-    // Check if the mouse is entering the MegaMenu; if not, close the menu
-    if (!menuRef.current || !menuRef.current.contains(event.relatedTarget)) {
+  const handleMenuClose = (event) => {
+    // Ensure that relatedTarget is a Node and check if it is inside the MegaMenu container
+    if (
+      !menuRef.current ||
+      (event.relatedTarget instanceof Node && !menuRef.current.contains(event.relatedTarget))
+    ) {
       setAnchorEl(null);
       setCurrentMenuItems([]);
     }
@@ -58,6 +61,22 @@ const Header = () => {
       items: ['Sheet Masks', 'Wash-off Masks', 'Sleeping Masks'],
     },
     { title: 'Sun Protection', items: ['Sunscreen', 'Makeup & SPF'] },
+  ];
+
+  // New Menu Items for Bestsellers
+  const bestsellersMenuItems = [
+    {
+      title: 'Top Rated',
+      items: ['Serums', 'Moisturizers', 'Cleansers', 'Toners'],
+    },
+    {
+      title: 'Popular Categories',
+      items: ['Skincare Sets', 'Anti-Aging', 'Brightening'],
+    },
+    {
+      title: 'Trending Now',
+      items: ['Face Masks', 'Eye Creams', 'SPF'],
+    },
   ];
 
   return (
@@ -80,6 +99,7 @@ const Header = () => {
             <Box
               sx={{ display: 'flex', flexGrow: 1, justifyContent: 'center' }}
             >
+              {/* Shop All Button */}
               <Button
                 color="inherit"
                 sx={{
@@ -93,6 +113,8 @@ const Header = () => {
               >
                 Shop All
               </Button>
+
+              {/* Bestsellers Button */}
               <Button
                 color="inherit"
                 sx={{
@@ -101,10 +123,15 @@ const Header = () => {
                     color: '#fff',
                   },
                 }}
+                onMouseEnter={event =>
+                  handleMenuOpen(event, bestsellersMenuItems)
+                }
                 onMouseLeave={handleMenuClose}
               >
                 Bestsellers
               </Button>
+
+              {/* Other Navigation Buttons */}
               <Button
                 color="inherit"
                 sx={{
