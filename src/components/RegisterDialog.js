@@ -1,3 +1,5 @@
+// src/components/RegisterDialog.js
+
 import React, { useState } from 'react';
 import {
   Dialog,
@@ -13,51 +15,26 @@ import {
   Link,
 } from '@mui/material';
 import {
-  Google as GoogleIcon,
   Close as CloseIcon,
   Visibility,
   VisibilityOff,
 } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
-const LoginDialog = ({ open, onClose, onSwitchToRegister }) => {
+const RegisterDialog = ({ open, onClose, onSwitchToLogin }) => {
+  const [fullname, setFullname] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleLogin = async e => {
+  const handleRegister = async e => {
     e.preventDefault();
-    try {
-      const response = await axios.post(
-        'http://localhost:5000/api/auth/login',
-        {
-          identifier: email,
-          password: password,
-        }
-      );
-      // Handle successful login (e.g., save token to local storage, redirect to homepage)
-      console.log('Login successful:', response.data);
-      onClose(); // Close the dialog after successful login
-    } catch (error) {
-      setError('Invalid email or password.');
-    }
-  };
-
-  const handleNavigateToForgotPassword = () => {
-    onClose(); // Close the dialog
-    navigate('/forgot-password'); // Navigate to the Forgot Password page
-  };
-
-  const handleSwitchToRegister = () => {
-    onClose(); // Close the login dialog
-    onSwitchToRegister(); // Open the register dialog
+    // Add your registration logic here
   };
 
   return (
@@ -71,7 +48,7 @@ const LoginDialog = ({ open, onClose, onSwitchToRegister }) => {
           textAlign: 'center',
         }}
       >
-        Log In
+        Register
         <IconButton
           aria-label="close"
           onClick={onClose}
@@ -96,11 +73,41 @@ const LoginDialog = ({ open, onClose, onSwitchToRegister }) => {
             color: '#7D7D7D',
           }}
         >
-          Please enter your e-mail and password:
+          Please fill in the fields below to create an account:
         </DialogContentText>
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleRegister}>
           <TextField
             autoFocus
+            margin="dense"
+            id="fullname"
+            label="Fullname"
+            type="text"
+            fullWidth
+            variant="outlined"
+            value={fullname}
+            onChange={e => setFullname(e.target.value)}
+            required
+            sx={{
+              fontFamily: 'Poppins, sans-serif',
+              fontSize: '14px',
+            }}
+          />
+          <TextField
+            margin="dense"
+            id="username"
+            label="Username"
+            type="text"
+            fullWidth
+            variant="outlined"
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+            required
+            sx={{
+              fontFamily: 'Poppins, sans-serif',
+              fontSize: '14px',
+            }}
+          />
+          <TextField
             margin="dense"
             id="email"
             label="Email"
@@ -143,11 +150,34 @@ const LoginDialog = ({ open, onClose, onSwitchToRegister }) => {
               fontSize: '14px',
             }}
           />
-          {error && (
-            <Typography color="error" variant="body2">
-              {error}
-            </Typography>
-          )}
+          <TextField
+            margin="dense"
+            id="confirmPassword"
+            label="Confirm Password"
+            type={showPassword ? 'text' : 'password'}
+            fullWidth
+            variant="outlined"
+            value={confirmPassword}
+            onChange={e => setConfirmPassword(e.target.value)}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            required
+            sx={{
+              fontFamily: 'Poppins, sans-serif',
+              fontSize: '14px',
+            }}
+          />
           <Button
             type="submit"
             variant="contained"
@@ -164,41 +194,10 @@ const LoginDialog = ({ open, onClose, onSwitchToRegister }) => {
               },
             }}
           >
-            Log In
+            Register
           </Button>
         </form>
-        <Divider sx={{ my: 2 }}>
-          <Typography
-            variant="body2"
-            sx={{
-              fontFamily: 'Poppins, sans-serif',
-              fontWeight: 400,
-              fontSize: '14px',
-              color: '#7D7D7D',
-            }}
-          >
-            OR
-          </Typography>
-        </Divider>
-        <Button
-          variant="outlined"
-          startIcon={<GoogleIcon />}
-          fullWidth
-          sx={{
-            mb: 2,
-            color: '#000',
-            borderColor: '#e0e0e0',
-            textTransform: 'none',
-            fontFamily: 'Poppins, sans-serif',
-            fontWeight: 600,
-            fontSize: '14px',
-            '&:hover': {
-              borderColor: '#e0e0e0',
-            },
-          }}
-        >
-          Continue With Google
-        </Button>
+        <Divider sx={{ my: 2 }} />
         <Typography
           variant="body2"
           align="center"
@@ -208,9 +207,9 @@ const LoginDialog = ({ open, onClose, onSwitchToRegister }) => {
             color: '#7D7D7D',
           }}
         >
-          Forgot your password?{' '}
+          Do you already have an account?{' '}
           <Link
-            onClick={handleNavigateToForgotPassword}
+            onClick={onSwitchToLogin}
             sx={{
               textTransform: 'none',
               color: '#000',
@@ -223,35 +222,7 @@ const LoginDialog = ({ open, onClose, onSwitchToRegister }) => {
               },
             }}
           >
-            Recover password
-          </Link>
-        </Typography>
-        <Typography
-          variant="body2"
-          align="center"
-          sx={{
-            fontFamily: 'Poppins, sans-serif',
-            fontSize: '14px',
-            color: '#7D7D7D',
-            mt: 2,
-          }}
-        >
-          New to Cherry Blossom?{' '}
-          <Link
-            onClick={handleSwitchToRegister}
-            sx={{
-              textTransform: 'none',
-              color: '#000',
-              fontWeight: 600,
-              fontFamily: 'Poppins, sans-serif',
-              cursor: 'pointer',
-              textDecoration: 'none',
-              '&:hover': {
-                textDecoration: 'underline',
-              },
-            }}
-          >
-            Create an Account
+            Back to Log In
           </Link>
         </Typography>
       </DialogContent>
@@ -259,4 +230,4 @@ const LoginDialog = ({ open, onClose, onSwitchToRegister }) => {
   );
 };
 
-export default LoginDialog;
+export default RegisterDialog;
